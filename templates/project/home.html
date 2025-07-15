@@ -1,0 +1,29 @@
+{% extends 'project/base.html' %}
+
+{% block title %}
+    Home
+{% endblock %}
+
+{% block content %}
+
+    <h2>Books /{{ books.count }}</h2>
+    <a class="btn btn-outline-secondary" href="{% url 'add' %}">+Vazifa qo'shish</a>
+    <ul class="task-list">
+        {% for book in books %}
+            <li class="task-card">
+                <div class="task-title">{{ book.title }}</div>
+                {% if book.description %}
+                    <div class="task-desc">{{ book.description|truncatechars:50 }}</div>
+                {% endif %}
+                <div class="task-actions">
+                    {% if not book.is_ %}
+                {%endif%}
+                    <a href="{% url 'edit' book.id %}" class="btn btn-outline-secondary btn-sm">Yangilash</a>
+                </div>
+            </li>
+        {% empty %}
+            <li>Kitoblar yo'q</li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+edit
