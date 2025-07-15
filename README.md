@@ -1,2 +1,2 @@
-# dj_exam
+# Abdurahmon Muhamedov
 
