@@ -22,7 +22,7 @@ def home(request):
 @login_required
 def add(request):
     if request.method == 'POST':
-        form = BookForm(request.POST,request.FILES)
+        form = BookForm(request.POST, request.FILES)
         if form.is_valid():
             task = form.save(commit=False)
             task.user = request.user
@@ -43,6 +43,7 @@ def delete(request, blog_id):
     blog.delete()
     return redirect('home')
 
+
 @login_required
 def edit(request, book_id):
     book = get_object_or_404(Book, id=book_id)
@@ -62,6 +63,7 @@ def edit(request, book_id):
         "book_id": book_id
     }
     return render(request, 'project/edit.html', context=context)
+
 
 def register(request):
     form = UserForm()
@@ -89,7 +91,7 @@ def profile(request):
         'profile': profile_,
         'user': user,
     }
-    return render(request, 'user/profile.html',context=context)
+    return render(request, 'user/profile.html', context=context)
 
 
 @login_required
@@ -111,48 +113,3 @@ def change_profile(request):
 
     return render(request, 'user/profile_change.html', {'u_form': u_form, 'p_form': p_form, 'profile': profile_})
 
-
-# from django.shortcuts import render, redirect
-# from .forms import BookForm
-#
-#
-# def add_book(request):
-#     if request.method == 'POST':
-#         form = BookForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('home')  # Перенаправление после сохранения
-#     else:
-#         form = BookForm()
-#
-#     return render(request, 'add_book.html', {'form': form})
-
-# from django.shortcuts import render, redirect, get_object_or_404
-# from .models import Book
-# from .forms import BookForm
-#
-# # Показать список книг
-# def book_list(request):
-#     books = Book.objects.all()
-#     return render(request, 'book_list.html', {'books': books})
-#
-# # Добавить книгу
-# def add_book(request):
-#     if request.method == 'POST':
-#         form = BookForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             return redirect('book_list')
-#     else:
-#         form = BookForm()
-#     return render(request, 'add_book.html', {'form': form})
-#
-# # Редактировать книгу
-#
-# # Удалить книгу
-# def delete_book(request, book_id):
-#     book = get_object_or_404(Book, id=book_id)
-#     if request.method == 'POST':
-#         book.delete()
-#         return redirect('book_list')
-#     return render(request, 'confirm_delete.html', {'book': book})
