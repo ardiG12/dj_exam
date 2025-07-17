@@ -52,9 +52,7 @@ def edit(request, book_id):
         if form.is_valid():
             book = form.save()
             messages.success(request, message=f"{book.title} o'zgartirildi")
-            if book.is_active:
-                return redirect('home')
-            return redirect('in_active_blogs')
+            return redirect('home')
     else:
         form = BookForm(instance=book)
     context = {
